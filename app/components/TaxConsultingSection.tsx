@@ -1,8 +1,11 @@
-import { taxConsulting } from "./content";
+import { taxConsulting as taxConsultingDefaults } from "./content";
 import Accordion from "./Accordion";
 import { IconArrowRight } from "./icons";
+import { getSection } from "@/lib/content-db";
 
-export default function TaxConsultingSection() {
+export default async function TaxConsultingSection() {
+  const taxConsulting = await getSection("tax_consulting", taxConsultingDefaults);
+
   return (
     <section id="us-tax" className="scroll-mt-24 bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-6xl">

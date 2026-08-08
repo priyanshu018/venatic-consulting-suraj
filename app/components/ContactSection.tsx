@@ -1,39 +1,42 @@
 import ContactForm from "./ContactForm";
 import { IconMail, IconMapPin, IconPhone, IconLinkedIn } from "./icons";
-import { contactEmail, phoneNumbers, officeAddress } from "./content";
+import { contact as contactDefaults } from "./content";
+import { getSection } from "@/lib/content-db";
 
-const contactMethods = [
-  {
-    icon: IconMail,
-    label: "Email Us",
-    value: contactEmail,
-    href: `mailto:${contactEmail}`,
-  },
-  ...phoneNumbers.map((phone) => ({
-    icon: IconPhone,
-    label: `Call Us (${phone.country})`,
-    value: phone.display,
-    href: phone.href,
-  })),
-  {
-    icon: IconMapPin,
-    label: "Office",
-    value: officeAddress,
-    href: undefined,
-  },
-  {
-    icon: IconLinkedIn,
-    label: "Connect With Us",
-    value: "LinkedIn",
-    href: "https://www.linkedin.com",
-  },
-];
-
-export default function ContactSection({
+export default async function ContactSection({
   showHeading = true,
 }: {
   showHeading?: boolean;
 }) {
+  const contact = await getSection("contact", contactDefaults);
+
+  const contactMethods = [
+    {
+      icon: IconMail,
+      label: "Email Us",
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+    },
+    ...contact.phones.map((phone) => ({
+      icon: IconPhone,
+      label: `Call Us (${phone.country})`,
+      value: phone.display,
+      href: phone.href,
+    })),
+    {
+      icon: IconMapPin,
+      label: "Office",
+      value: contact.address,
+      href: undefined,
+    },
+    {
+      icon: IconLinkedIn,
+      label: "Connect With Us",
+      value: "LinkedIn",
+      href: "https://www.linkedin.com",
+    },
+  ];
+
   return (
     <section className="bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-6xl">
@@ -88,7 +91,7 @@ export default function ContactSection({
             })}
           </div>
 
-          <ContactForm />
+          <ContactForm contactEmail={contact.email} />
         </div>
       </div>
     </section>

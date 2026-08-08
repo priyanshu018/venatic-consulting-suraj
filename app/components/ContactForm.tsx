@@ -2,9 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { IconArrowRight } from "./icons";
-import { contactEmail } from "./content";
 
-export default function ContactForm() {
+export default function ContactForm({ contactEmail }: { contactEmail: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");

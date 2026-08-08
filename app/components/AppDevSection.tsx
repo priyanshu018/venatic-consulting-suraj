@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { appDev } from "./content";
+import { appDev as appDevDefaults } from "./content";
 import { IconArrowRight, IconCheckShield } from "./icons";
+import { getSection } from "@/lib/content-db";
 
-export default function AppDevSection() {
+export default async function AppDevSection() {
+  const appDev = await getSection("app_dev", appDevDefaults);
+
   return (
     <section id="application-development" className="scroll-mt-24 bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-6xl">

@@ -1,6 +1,10 @@
+import { caseStudies as caseStudiesDefaults } from "./content";
+import { getSection } from "@/lib/content-db";
 import StoriesCarousel from "./StoriesCarousel";
 
-export default function SuccessStories() {
+export default async function SuccessStories() {
+  const caseStudies = await getSection("case_studies", caseStudiesDefaults);
+
   return (
     <section className="bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -14,7 +18,7 @@ export default function SuccessStories() {
           </h2>
         </div>
 
-        <StoriesCarousel />
+        <StoriesCarousel stories={caseStudies} />
       </div>
     </section>
   );

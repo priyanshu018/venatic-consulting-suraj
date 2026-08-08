@@ -1,4 +1,5 @@
-import { industries } from "./content";
+import { industries as industriesDefaults } from "./content";
+import { getSection } from "@/lib/content-db";
 import {
   IconBuilding,
   IconHeart,
@@ -21,7 +22,9 @@ const industryIcons = [
   IconNetwork,
 ];
 
-export default function Industries() {
+export default async function Industries() {
+  const industries = await getSection("industries", industriesDefaults);
+
   return (
     <section className="bg-navy-900 px-6 py-14 lg:px-10">
       <div className="mx-auto max-w-7xl text-center">
@@ -34,7 +37,7 @@ export default function Industries() {
 
         <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-8">
           {industries.map((industry, i) => {
-            const Icon = industryIcons[i];
+            const Icon = industryIcons[i] ?? IconBuilding;
             return (
               <div key={industry} className="flex flex-col items-center gap-3">
                 <Icon className="h-7 w-7 text-gold-400" />

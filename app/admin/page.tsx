@@ -1,8 +1,33 @@
 import type { Metadata } from "next";
 import { verifySession } from "@/lib/dal";
 import { getStats } from "@/lib/stats";
+import { getSection } from "@/lib/content-db";
 import { logout } from "@/app/actions/auth";
+import {
+  hero as heroDefaults,
+  heroFeatures as heroFeaturesDefaults,
+  services as servicesDefaults,
+  taxConsulting as taxConsultingDefaults,
+  outsourcing as outsourcingDefaults,
+  appDev as appDevDefaults,
+  appSecurity as appSecurityDefaults,
+  caseStudies as caseStudiesDefaults,
+  industries as industriesDefaults,
+  workWithCards as workWithCardsDefaults,
+  testimonials as testimonialsDefaults,
+  contact as contactDefaults,
+} from "@/app/components/content";
+
 import StatsForm from "./StatsForm";
+import AdminSectionCard from "./editors/AdminSectionCard";
+import TextEditor from "./editors/TextEditor";
+import ListEditor from "./editors/ListEditor";
+import StringListEditor from "./editors/StringListEditor";
+import TaxConsultingEditor from "./editors/TaxConsultingEditor";
+import OutsourcingEditor from "./editors/OutsourcingEditor";
+import AppDevEditor from "./editors/AppDevEditor";
+import AppSecurityEditor from "./editors/AppSecurityEditor";
+import ContactEditor from "./editors/ContactEditor";
 
 export const metadata: Metadata = {
   title: "Admin | Venatic Consulting",
@@ -11,22 +36,64 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+const NAV = [
+  { id: "stats", label: "Stats" },
+  { id: "hero", label: "Hero" },
+  { id: "hero-features", label: "Hero Highlights" },
+  { id: "services", label: "Services" },
+  { id: "tax", label: "US Tax" },
+  { id: "outsourcing", label: "Outsourcing" },
+  { id: "app-dev", label: "App Dev" },
+  { id: "app-security", label: "App Security" },
+  { id: "case-studies", label: "Success Stories" },
+  { id: "industries", label: "Industries" },
+  { id: "who-we-work-with", label: "Who We Work With" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "contact", label: "Contact Info" },
+];
+
 export default async function AdminDashboardPage() {
   const session = await verifySession();
-  const stats = await getStats();
+
+  const [
+    stats,
+    hero,
+    heroFeatures,
+    services,
+    taxConsulting,
+    outsourcing,
+    appDev,
+    appSecurity,
+    caseStudies,
+    industries,
+    whoWeWorkWith,
+    testimonials,
+    contact,
+  ] = await Promise.all([
+    getStats(),
+    getSection("hero", heroDefaults),
+    getSection("hero_features", heroFeaturesDefaults),
+    getSection("services", servicesDefaults),
+    getSection("tax_consulting", taxConsultingDefaults),
+    getSection("outsourcing", outsourcingDefaults),
+    getSection("app_dev", appDevDefaults),
+    getSection("app_security", appSecurityDefaults),
+    getSection("case_studies", caseStudiesDefaults),
+    getSection("industries", industriesDefaults),
+    getSection("who_we_work_with", workWithCardsDefaults),
+    getSection("testimonials", testimonialsDefaults),
+    getSection("contact", contactDefaults),
+  ]);
 
   return (
-    <div className="min-h-[calc(100vh-1px)] bg-cream-50 px-6 py-16">
-      <div className="mx-auto max-w-2xl">
-        <div className="flex items-center justify-between">
+    <div className="min-h-[calc(100vh-1px)] bg-cream-50 pb-24">
+      <div className="sticky top-0 z-10 border-b border-navy-900/10 bg-cream-50/95 px-6 py-4 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-xs font-bold tracking-[0.25em] text-gold-500">
               ADMIN
             </p>
-            <h1 className="mt-2 text-2xl font-extrabold tracking-tight text-navy-900">
-              Site Statistics
-            </h1>
-            <p className="mt-1 text-sm text-navy-900/60">
+            <p className="text-sm text-navy-900/60">
               Signed in as {session.email}
             </p>
           </div>
@@ -39,14 +106,160 @@ export default async function AdminDashboardPage() {
             </button>
           </form>
         </div>
+        <nav className="mx-auto mt-3 flex max-w-5xl flex-wrap gap-x-4 gap-y-1">
+          {NAV.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="text-xs font-semibold text-navy-900/60 hover:text-navy-900"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
 
-        <div className="mt-8 rounded-2xl border border-navy-900/10 bg-white p-8">
-          <p className="text-sm text-navy-900/60">
-            These numbers power the Countries / Projects / Clients counters
-            shown in the hero, the closing stats bar, and the About page.
-          </p>
+      <div className="mx-auto mt-8 flex max-w-5xl flex-col gap-6 px-6">
+        <AdminSectionCard
+          id="stats"
+          title="Site Statistics"
+          description="Powers the Countries / Projects / Clients counters in the hero, closing stats bar, and About page."
+        >
           <StatsForm initialStats={stats} />
-        </div>
+        </AdminSectionCard>
+
+        <AdminSectionCard id="hero" title="Hero Section">
+          <TextEditor
+            sectionKey="hero"
+            initial={hero}
+            fields={[
+              { key: "eyebrow", label: "Eyebrow" },
+              { key: "titleLine1", label: "Title — line 1" },
+              { key: "titleLine2", label: "Title — line 2" },
+              { key: "titleHighlight", label: "Title — highlighted word" },
+              { key: "description", label: "Description", multiline: true },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="hero-features"
+          title="Hero Feature Highlights"
+          description="The three feature call-outs under the hero buttons, and reused on the About page."
+        >
+          <ListEditor
+            sectionKey="hero_features"
+            itemLabel="Highlight"
+            initial={heroFeatures}
+            blankItem={{ title: "", subtitle: "" }}
+            fields={[
+              { key: "title", label: "Title" },
+              { key: "subtitle", label: "Subtitle" },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="services"
+          title="Services Overview Cards"
+          description="The 4 cards under 'End-to-End Solutions for Complex Challenges'."
+        >
+          <ListEditor
+            sectionKey="services"
+            itemLabel="Service"
+            initial={services}
+            blankItem={{ slug: "", title: "", description: "" }}
+            fields={[
+              { key: "title", label: "Title" },
+              { key: "description", label: "Description", multiline: true },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard id="tax" title="US Tax Consulting">
+          <TaxConsultingEditor initial={taxConsulting} />
+        </AdminSectionCard>
+
+        <AdminSectionCard id="outsourcing" title="Outsourcing">
+          <OutsourcingEditor initial={outsourcing} />
+        </AdminSectionCard>
+
+        <AdminSectionCard id="app-dev" title="Application Development">
+          <AppDevEditor initial={appDev} />
+        </AdminSectionCard>
+
+        <AdminSectionCard id="app-security" title="Application Security Testing">
+          <AppSecurityEditor initial={appSecurity} />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="case-studies"
+          title="Success Stories"
+          description="Photos aren't editable here — only tag, title and description."
+        >
+          <ListEditor
+            sectionKey="case_studies"
+            itemLabel="Story"
+            initial={caseStudies}
+            blankItem={{ tag: "", image: "", title: "", description: "" }}
+            fields={[
+              { key: "tag", label: "Tag" },
+              { key: "title", label: "Title" },
+              { key: "description", label: "Description", multiline: true },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="industries"
+          title="Industries We Serve"
+          description="Icons are assigned by position, so new entries beyond the 8th reuse the first icon."
+        >
+          <StringListEditor
+            sectionKey="industries"
+            itemLabel="Industry"
+            initial={industries}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="who-we-work-with"
+          title="Who We Work With"
+          description="Photos aren't editable here — only title and description."
+        >
+          <ListEditor
+            sectionKey="who_we_work_with"
+            itemLabel="Card"
+            initial={whoWeWorkWith}
+            blankItem={{ image: "", title: "", description: "" }}
+            fields={[
+              { key: "title", label: "Title" },
+              { key: "description", label: "Description", multiline: true },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard id="testimonials" title="Testimonials">
+          <ListEditor
+            sectionKey="testimonials"
+            itemLabel="Testimonial"
+            initial={testimonials}
+            blankItem={{ quote: "", attribution: "", company: "" }}
+            fields={[
+              { key: "quote", label: "Quote", multiline: true },
+              { key: "attribution", label: "Attribution (e.g. CFO)" },
+              { key: "company", label: "Company" },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
+          id="contact"
+          title="Contact Information"
+          description="Used across the footer, contact page and floating WhatsApp button."
+        >
+          <ContactEditor initial={contact} />
+        </AdminSectionCard>
       </div>
     </div>
   );

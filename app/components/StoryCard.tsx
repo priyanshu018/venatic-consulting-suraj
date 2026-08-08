@@ -12,7 +12,7 @@ export default function StoryCard({
     <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-navy-900/10 bg-cream-50">
       <div className="relative aspect-[4/3]">
         <Image
-          src={story.image}
+          src={story.image || "/images/corporates.jpg"}
           alt={story.title}
           fill
           sizes="(min-width: 1024px) 33vw, 85vw"

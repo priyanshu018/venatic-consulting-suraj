@@ -3,9 +3,10 @@ import PageHero from "../../components/PageHero";
 import WhoWeWorkWith from "../../components/WhoWeWorkWith";
 import StatsCta from "../../components/StatsCta";
 import Counter from "../../components/Counter";
-import { heroFeatures } from "../../components/content";
+import { heroFeatures as heroFeaturesDefaults } from "../../components/content";
 import { IconGlobe, IconChartLine, IconCheckShield } from "../../components/icons";
 import { getStats } from "@/lib/stats";
+import { getSection } from "@/lib/content-db";
 
 export const metadata: Metadata = {
   title: "About Us | Venatic Consulting",
@@ -18,7 +19,10 @@ export const dynamic = "force-dynamic";
 const valueIcons = [IconGlobe, IconChartLine, IconCheckShield];
 
 export default async function AboutPage() {
-  const dbStats = await getStats();
+  const [dbStats, heroFeatures] = await Promise.all([
+    getStats(),
+    getSection("hero_features", heroFeaturesDefaults),
+  ]);
   const stats = [
     { value: `${dbStats.countries}+`, label: "Countries" },
     { value: `${dbStats.projects}+`, label: "Projects" },

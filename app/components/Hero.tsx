@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { heroFeatures } from "./content";
+import { hero as heroDefaults, heroFeatures as heroFeaturesDefaults } from "./content";
 import { IconArrowRight, IconCheckShield, IconChartLine, IconGlobe } from "./icons";
 import Counter from "./Counter";
 import { getStats } from "@/lib/stats";
+import { getSection } from "@/lib/content-db";
 
 const featureIcons = [IconGlobe, IconChartLine, IconCheckShield];
 
@@ -41,7 +42,11 @@ function HeroVisual({ stats }: { stats: { value: string; label: string }[] }) {
 }
 
 export default async function Hero() {
-  const dbStats = await getStats();
+  const [dbStats, hero, heroFeatures] = await Promise.all([
+    getStats(),
+    getSection("hero", heroDefaults),
+    getSection("hero_features", heroFeaturesDefaults),
+  ]);
   const stats = [
     { value: `${dbStats.countries}+`, label: "Countries" },
     { value: `${dbStats.projects}+`, label: "Projects" },
@@ -53,17 +58,16 @@ export default async function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-10 lg:py-24">
           <p className="text-xs font-bold tracking-[0.25em] text-gold-500">
-            STRATEGY. PERFORMANCE. TRANSFORMATION.
+            {hero.eyebrow}
           </p>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-navy-900 sm:text-5xl">
-            Driving Growth.
+            {hero.titleLine1}
             <br />
-            Delivering <span className="text-gold-500">Impact.</span>
+            {hero.titleLine2}{" "}
+            <span className="text-gold-500">{hero.titleHighlight}</span>
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-navy-900/70">
-            Venatic Consulting partners with organizations across the globe
-            to solve complex challenges and create lasting value through
-            strategy, insight and execution.
+            {hero.description}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">

@@ -7,17 +7,13 @@ import {
   IconWhatsApp,
   IconLinkedIn,
 } from "./icons";
-import {
-  whatsappNumber,
-  whatsappDisplay,
-  contactEmail,
-  phoneNumbers,
-  officeAddress,
-  navLinks,
-} from "./content";
+import { contact as contactDefaults, navLinks } from "./content";
+import { getSection } from "@/lib/content-db";
 
-export default function Footer() {
+export default async function Footer() {
   const year = new Date().getFullYear();
+  const contact = await getSection("contact", contactDefaults);
+  const { email: contactEmail, phones: phoneNumbers, address: officeAddress, whatsappNumber, whatsappDisplay } = contact;
 
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-navy-900">

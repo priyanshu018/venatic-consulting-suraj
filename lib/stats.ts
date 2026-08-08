@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { query } from "./db";
+import { getSupabase } from "./supabase";
 
 export type SiteStats = {
   countries: number;
@@ -12,26 +12,25 @@ const DEFAULT_STATS: SiteStats = { countries: 2, projects: 25, clients: 20 };
 
 export const getStats = cache(async (): Promise<SiteStats> => {
   try {
-    const { rows } = await query<SiteStats>(
-      "select countries, projects, clients from site_stats where id = 1"
-    );
-    return rows[0] ?? DEFAULT_STATS;
+    const { data, error } = await getSupabase()
+      .from("site_stats")
+      .select("countries, projects, clients")
+      .eq("id", 1)
+      .maybeSingle();
+
+    if (error || !data) return DEFAULT_STATS;
+    return data as SiteStats;
   } catch {
-    // DB not configured yet (e.g. local dev without DATABASE_URL) — fall back
-    // to sensible defaults so the site still renders.
+    // Supabase not configured yet (e.g. local dev) — fall back to defaults
+    // so the site still renders.
     return DEFAULT_STATS;
   }
 });
 
 export async function updateStats(data: SiteStats) {
-  await query(
-    `insert into site_stats (id, countries, projects, clients, updated_at)
-     values (1, $1, $2, $3, now())
-     on conflict (id) do update set
-       countries = excluded.countries,
-       projects = excluded.projects,
-       clients = excluded.clients,
-       updated_at = now()`,
-    [data.countries, data.projects, data.clients]
-  );
+  const { error } = await getSupabase()
+    .from("site_stats")
+    .upsert({ id: 1, ...data, updated_at: new Date().toISOString() });
+
+  if (error) throw new Error(error.message);
 }

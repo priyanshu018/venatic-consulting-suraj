@@ -1,10 +1,13 @@
-import { whatsappNumber } from "./content";
+import { contact as contactDefaults } from "./content";
 import { IconWhatsApp } from "./icons";
+import { getSection } from "@/lib/content-db";
 
-export default function FloatingWhatsApp() {
+export default async function FloatingWhatsApp() {
+  const contact = await getSection("contact", contactDefaults);
+
   return (
     <a
-      href={`https://wa.me/${whatsappNumber}`}
+      href={`https://wa.me/${contact.whatsappNumber}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

@@ -1,19 +1,15 @@
 import "server-only";
 import bcrypt from "bcryptjs";
-import { query } from "./db";
-
-type AdminUserRow = {
-  email: string;
-  password_hash: string;
-};
+import { getSupabase } from "./supabase";
 
 export async function verifyAdminCredentials(email: string, password: string) {
-  const { rows } = await query<AdminUserRow>(
-    "select email, password_hash from admin_users where email = $1",
-    [email.trim().toLowerCase()]
-  );
-  const user = rows[0];
-  if (!user) return false;
+  const { data, error } = await getSupabase()
+    .from("admin_users")
+    .select("password_hash")
+    .eq("email", email.trim().toLowerCase())
+    .maybeSingle();
 
-  return bcrypt.compare(password, user.password_hash);
+  if (error || !data) return false;
+
+  return bcrypt.compare(password, data.password_hash as string);
 }

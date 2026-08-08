@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { services } from "./content";
+import { services as servicesDefaults } from "./content";
 import { IconArrowRight, IconBriefcase, IconGlobe, IconDocument, IconLaptop } from "./icons";
+import { getSection } from "@/lib/content-db";
 
 const serviceIcons = [IconBriefcase, IconGlobe, IconDocument, IconLaptop];
 
-export default function Services() {
+export default async function Services() {
+  const services = await getSection("services", servicesDefaults);
+
   return (
     <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-white px-6 pb-20 pt-16 shadow-[0_-24px_48px_-32px_rgba(10,26,51,0.35)] lg:-mt-16 lg:rounded-t-[4rem] lg:px-10 lg:pt-20">
       <div className="mx-auto max-w-7xl">
@@ -19,7 +22,7 @@ export default function Services() {
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => {
-            const Icon = serviceIcons[i];
+            const Icon = serviceIcons[i] ?? IconDocument;
             return (
               <div
                 key={service.title}
@@ -35,7 +38,7 @@ export default function Services() {
                   {service.description}
                 </p>
                 <Link
-                  href={`/services#${service.slug}`}
+                  href={service.slug ? `/services#${service.slug}` : "/services"}
                   className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-500"
                 >
                   Learn More

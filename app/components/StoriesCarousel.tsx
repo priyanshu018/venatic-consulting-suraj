@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { caseStudies } from "./content";
+import type { caseStudies as caseStudiesType } from "./content";
 import StoryCard from "./StoryCard";
 
-export default function StoriesCarousel() {
+export default function StoriesCarousel({
+  stories: caseStudies,
+}: {
+  stories: typeof caseStudiesType;
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 

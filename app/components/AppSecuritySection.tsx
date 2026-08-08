@@ -1,7 +1,10 @@
-import { appSecurity } from "./content";
+import { appSecurity as appSecurityDefaults } from "./content";
 import Accordion from "./Accordion";
+import { getSection } from "@/lib/content-db";
 
-export default function AppSecuritySection() {
+export default async function AppSecuritySection() {
+  const appSecurity = await getSection("app_security", appSecurityDefaults);
+
   return (
     <section className="bg-cream-50 px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-6xl">

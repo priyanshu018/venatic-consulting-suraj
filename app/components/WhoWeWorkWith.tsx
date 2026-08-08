@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { workWithCards } from "./content";
+import { workWithCards as workWithCardsDefaults } from "./content";
 import {
   IconArrowRight,
   IconBuilding,
@@ -8,10 +8,13 @@ import {
   IconGlobe,
   IconTrendUp,
 } from "./icons";
+import { getSection } from "@/lib/content-db";
 
 const cardIcons = [IconBuilding, IconLandmark, IconGlobe, IconTrendUp];
 
-export default function WhoWeWorkWith() {
+export default async function WhoWeWorkWith() {
+  const workWithCards = await getSection("who_we_work_with", workWithCardsDefaults);
+
   return (
     <section className="bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
@@ -37,14 +40,14 @@ export default function WhoWeWorkWith() {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {workWithCards.map((card, i) => {
-            const Icon = cardIcons[i];
+            const Icon = cardIcons[i] ?? IconBuilding;
             return (
               <div
                 key={card.title}
                 className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
               >
                 <Image
-                  src={card.image}
+                  src={card.image || "/images/corporates.jpg"}
                   alt={card.title}
                   fill
                   sizes="(min-width: 1024px) 25vw, 50vw"

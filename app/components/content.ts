@@ -11,6 +11,23 @@ export const phoneNumbers = [
 export const officeAddress =
   "D.No 1-65/469, PM&BS Square, Avenue 1, Kakatiya Hills, Madhapur, Telangana 500081";
 
+export const contact = {
+  email: contactEmail,
+  phones: phoneNumbers,
+  address: officeAddress,
+  whatsappNumber,
+  whatsappDisplay,
+};
+
+export const hero = {
+  eyebrow: "STRATEGY. PERFORMANCE. TRANSFORMATION.",
+  titleLine1: "Driving Growth.",
+  titleLine2: "Delivering",
+  titleHighlight: "Impact.",
+  description:
+    "Venatic Consulting partners with organizations across the globe to solve complex challenges and create lasting value through strategy, insight and execution.",
+};
+
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },

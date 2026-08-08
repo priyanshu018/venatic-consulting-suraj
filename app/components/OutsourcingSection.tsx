@@ -1,6 +1,9 @@
-import { outsourcing } from "./content";
+import { outsourcing as outsourcingDefaults } from "./content";
+import { getSection } from "@/lib/content-db";
 
-export default function OutsourcingSection() {
+export default async function OutsourcingSection() {
+  const outsourcing = await getSection("outsourcing", outsourcingDefaults);
+
   return (
     <section id="outsourcing" className="scroll-mt-24 bg-cream-50 px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-6xl">
