@@ -1,10 +1,14 @@
+// TODO: replace with the real WhatsApp Business number (digits only, with country code)
+export const whatsappNumber = "910000000000";
+export const whatsappDisplay = "+91 00000 00000";
+
 export const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Clients", href: "#clients" },
-  { label: "Resources", href: "#resources" },
-  { label: "Careers", href: "#careers" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Clients", href: "/clients" },
+  { label: "Resources", href: "/resources" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export const heroStats = [
@@ -21,31 +25,37 @@ export const heroFeatures = [
 
 export const services = [
   {
+    slug: "strategy-growth",
     title: "Strategy & Growth",
     description:
       "Market entry, growth strategies, business model innovation and commercial due diligence.",
   },
   {
+    slug: "operations-excellence",
     title: "Operations Excellence",
     description:
       "Process optimization, cost reduction, supply chain improvement and performance enhancement.",
   },
   {
+    slug: "finance-performance",
     title: "Finance & Performance",
     description:
       "Financial planning, KPI frameworks, reporting systems and performance management.",
   },
   {
+    slug: "organization-people",
     title: "Organization & People",
     description:
       "Organization design, change management, talent strategy and leadership development.",
   },
   {
+    slug: "digital-transformation",
     title: "Digital Transformation",
     description:
       "Digital strategy, technology advisory, data analytics and innovation enablement.",
   },
   {
+    slug: "government-advisory",
     title: "Government Advisory",
     description:
       "Public policy, program evaluation, institutional strengthening and capacity building.",

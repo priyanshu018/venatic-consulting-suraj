@@ -1,4 +1,5 @@
-import { IconMapPin, IconMail, IconLinkedIn } from "./icons";
+import { IconMapPin, IconMail, IconWhatsApp, IconLinkedIn } from "./icons";
+import { whatsappNumber, whatsappDisplay } from "./content";
 
 export default function Footer() {
   return (
@@ -22,7 +23,7 @@ export default function Footer() {
         )}
       </svg>
 
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left lg:px-10">
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-8 text-center sm:flex-row sm:flex-wrap sm:justify-between sm:text-left lg:px-10">
         <div className="flex items-center gap-2 text-sm text-white/80">
           <IconMapPin className="h-5 w-5 text-gold-400" />
           <span>Global Offices &mdash; 20+ Countries Worldwide</span>
@@ -33,6 +34,15 @@ export default function Footer() {
         >
           <IconMail className="h-5 w-5 text-gold-400" />
           <span>hello@venaticconsulting.com</span>
+        </a>
+        <a
+          href={`https://wa.me/${whatsappNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white"
+        >
+          <IconWhatsApp className="h-5 w-5 text-gold-400" />
+          <span>WhatsApp &mdash; {whatsappDisplay}</span>
         </a>
         <a
           href="https://www.linkedin.com"

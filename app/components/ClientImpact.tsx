@@ -21,7 +21,7 @@ export default function ClientImpact() {
             Real Challenges. Real Results.
           </h2>
           <Link
-            href="#resources"
+            href="/resources"
             className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-gold-500 px-6 py-3 text-sm font-semibold text-navy-900 transition-colors hover:bg-gold-400"
           >
             View Case Studies

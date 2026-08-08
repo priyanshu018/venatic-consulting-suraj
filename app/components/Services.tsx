@@ -21,7 +21,7 @@ const serviceIcons = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white px-6 py-20 lg:px-10">
+    <section className="bg-white px-6 py-20 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <p className="text-xs font-bold tracking-[0.25em] text-gold-500">
@@ -38,7 +38,8 @@ export default function Services() {
             return (
               <div
                 key={service.title}
-                className="rounded-2xl border border-navy-900/10 p-8 transition-shadow hover:shadow-lg"
+                id={service.slug}
+                className="scroll-mt-24 rounded-2xl border border-navy-900/10 p-8 transition-shadow hover:shadow-lg"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-navy-900 text-white">
                   <Icon className="h-5 w-5" />
@@ -50,7 +51,7 @@ export default function Services() {
                   {service.description}
                 </p>
                 <Link
-                  href="#contact"
+                  href={`/services#${service.slug}`}
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-500"
                 >
                   Learn More

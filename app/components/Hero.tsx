@@ -1,12 +1,116 @@
 import Link from "next/link";
 import { heroFeatures, heroStats } from "./content";
 import { IconArrowRight, IconCheckShield, IconChartLine, IconGlobe } from "./icons";
+import Counter from "./Counter";
 
 const featureIcons = [IconGlobe, IconChartLine, IconCheckShield];
 
+const buildings = [
+  { x: 20, w: 55, h: 150 },
+  { x: 85, w: 40, h: 200 },
+  { x: 135, w: 50, h: 130 },
+  { x: 195, w: 35, h: 230 },
+  { x: 240, w: 65, h: 170 },
+  { x: 315, w: 45, h: 260 },
+  { x: 370, w: 55, h: 150 },
+  { x: 435, w: 40, h: 190 },
+  { x: 485, w: 60, h: 140 },
+  { x: 555, w: 45, h: 220 },
+  { x: 610, w: 55, h: 170 },
+  { x: 675, w: 50, h: 210 },
+  { x: 735, w: 40, h: 140 },
+];
+
+function buildingWindows(b: (typeof buildings)[number], seed: number) {
+  const rows = Math.floor(b.h / 22);
+  const cols = Math.max(2, Math.floor(b.w / 16));
+  const windows = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const lit = (r * cols + c + seed) % 3 === 0;
+      if (!lit) continue;
+      windows.push(
+        <rect
+          key={`${r}-${c}`}
+          x={b.x + 8 + c * 14}
+          y={300 - b.h + 14 + r * 22}
+          width={6}
+          height={9}
+          fill="#e9c887"
+          opacity={0.7}
+        />
+      );
+    }
+  }
+  return windows;
+}
+
+function HeroVisual() {
+  return (
+    <>
+      <div className="clip-hero absolute inset-0 overflow-hidden bg-navy-900">
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox="0 0 800 500"
+          preserveAspectRatio="xMidYMax slice"
+        >
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#1c3a67" />
+              <stop offset="45%" stopColor="#142c52" />
+              <stop offset="100%" stopColor="#0a1a33" />
+            </linearGradient>
+            <radialGradient id="glow" cx="78%" cy="38%" r="55%">
+              <stop offset="0%" stopColor="#f0c877" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#f0c877" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#sky)" />
+          <rect width="800" height="500" fill="url(#glow)" />
+          <g opacity="0.5">
+            {buildings.slice(2, 9).map((b, i) => (
+              <rect
+                key={`back-${i}`}
+                x={b.x - 10}
+                y={200 - b.h * 0.6}
+                width={b.w}
+                height={b.h * 0.6 + 100}
+                fill="#0a1a33"
+              />
+            ))}
+          </g>
+          <g>
+            {buildings.map((b, i) => (
+              <g key={i}>
+                <rect x={b.x} y={300 - b.h} width={b.w} height={b.h} fill="#0a1a33" />
+                {buildingWindows(b, i)}
+              </g>
+            ))}
+          </g>
+          <rect y="298" width="800" height="4" fill="#0a1a33" />
+        </svg>
+        <div className="absolute right-10 top-10 h-px w-28 rotate-45 bg-gold-400/50" />
+        <div className="absolute right-28 top-24 h-px w-16 rotate-45 bg-gold-400/30" />
+      </div>
+      <div className="clip-hero-line absolute inset-0 bg-gold-500" />
+
+      <div className="absolute bottom-8 left-4 z-10 flex divide-x divide-white/15 rounded-2xl bg-navy-950 px-6 py-6 shadow-xl sm:left-8 sm:px-10">
+        {heroStats.map((stat) => (
+          <div key={stat.label} className="px-4 text-center first:pl-0 last:pr-0 sm:px-6">
+            <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
+              <Counter value={stat.value} />
+            </p>
+            <p className="mt-1 text-xs font-medium text-white/70">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-cream-50">
+    <section className="relative overflow-hidden bg-cream-50">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-center px-6 py-16 lg:px-10 lg:py-24">
           <p className="text-xs font-bold tracking-[0.25em] text-gold-500">
@@ -25,14 +129,14 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="#services"
+              href="/services"
               className="inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
             >
               Explore Our Services
               <IconArrowRight />
             </Link>
             <Link
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full border border-navy-900/20 px-6 py-3 text-sm font-semibold text-navy-900 transition-colors hover:bg-navy-900/5"
             >
               Talk to an Expert
@@ -57,52 +161,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative min-h-[420px] lg:min-h-[600px]">
-          <div className="clip-hero absolute inset-0 bg-navy-900">
-            <div
-              className="absolute inset-0 opacity-90"
-              style={{
-                backgroundImage:
-                  "linear-gradient(160deg, #142c52 0%, #0e2140 55%, #0a1a33 100%)",
-              }}
-            />
-            <svg
-              className="absolute bottom-0 left-0 h-2/3 w-full text-navy-950/60"
-              viewBox="0 0 800 300"
-              preserveAspectRatio="none"
-              fill="currentColor"
-            >
-              <rect x="40" y="120" width="60" height="180" />
-              <rect x="110" y="80" width="45" height="220" />
-              <rect x="165" y="150" width="55" height="150" />
-              <rect x="230" y="60" width="40" height="240" />
-              <rect x="280" y="100" width="70" height="200" />
-              <rect x="360" y="40" width="50" height="260" />
-              <rect x="420" y="130" width="60" height="170" />
-              <rect x="490" y="90" width="45" height="210" />
-              <rect x="545" y="150" width="65" height="150" />
-              <rect x="620" y="70" width="50" height="230" />
-              <rect x="680" y="110" width="60" height="190" />
-              <rect x="750" y="150" width="40" height="150" />
-            </svg>
-            <div className="absolute right-8 top-10 h-px w-24 rotate-45 bg-gold-400/60" />
-            <div className="absolute right-24 top-24 h-px w-16 rotate-45 bg-gold-400/40" />
-          </div>
-          <div className="clip-hero-line absolute inset-0 bg-gold-500" />
-
-          <div className="absolute bottom-8 left-4 z-10 flex divide-x divide-white/15 rounded-2xl bg-navy-950 px-6 py-6 shadow-xl sm:left-8 sm:px-10">
-            {heroStats.map((stat) => (
-              <div key={stat.label} className="px-4 text-center first:pl-0 last:pr-0 sm:px-6">
-                <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-xs font-medium text-white/70">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
+        {/* mobile/tablet: image sits in normal flow, full width */}
+        <div className="relative min-h-[420px] lg:hidden">
+          <HeroVisual />
         </div>
+      </div>
+
+      {/* desktop: image bleeds from viewport center to the right edge */}
+      <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block">
+        <HeroVisual />
       </div>
     </section>
   );

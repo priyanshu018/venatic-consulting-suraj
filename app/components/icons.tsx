@@ -195,6 +195,28 @@ export function IconMail({ className = base }: IconProps) {
   );
 }
 
+export function IconLogoMark({ className = "h-7 w-7" }: IconProps) {
+  return (
+    <svg viewBox="0 0 32 32" className={className}>
+      <path d="M2 4 14 28 16 24 6 4Z" fill="#c9973f" />
+      <path d="M30 4 18 28 14.5 21 22.5 4Z" fill="#0e2140" />
+    </svg>
+  );
+}
+
+export function IconWhatsApp({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
+      <path d="M6.5 17.5 4 20l2.6-.7A8 8 0 1 0 4 12a8 8 0 0 0 1.3 4.4Z" />
+      <path
+        d="M9 9.6c0-.6.5-1.1 1.1-1.1.3 0 .5.1.6.4l.7 1.4c.1.2 0 .5-.1.7l-.6.7c.5 1 1.3 1.8 2.3 2.3l.7-.6c.2-.1.5-.2.7-.1l1.4.7c.3.1.4.3.4.6 0 .6-.5 1.1-1.1 1.1-3 0-6.1-3.1-6.1-6.1Z"
+        fill="currentColor"
+        stroke="none"
+      />
+    </svg>
+  );
+}
+
 export function IconLinkedIn({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>

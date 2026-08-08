@@ -23,7 +23,7 @@ const industryIcons = [
 
 export default function Industries() {
   return (
-    <section id="clients" className="bg-navy-900 px-6 py-14 lg:px-10">
+    <section className="bg-navy-900 px-6 py-14 lg:px-10">
       <div className="mx-auto max-w-7xl text-center">
         <p className="text-xs font-bold tracking-[0.25em] text-gold-400">
           CLIENTS WE SERVE

@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { closingStats } from "./content";
 import { IconArrowRight } from "./icons";
+import Counter from "./Counter";
 
 export default function StatsCta() {
   return (
-    <section id="contact" className="bg-navy-950">
+    <section className="bg-navy-950">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 divide-x divide-white/10">
           {closingStats.map((stat) => (
             <div key={stat.label} className="px-6 text-center first:pl-0">
               <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
-                {stat.value}
+                <Counter value={stat.value} />
               </p>
               <p className="mt-1 text-xs font-medium text-white/70">
                 {stat.label}
@@ -24,7 +25,7 @@ export default function StatsCta() {
             Let&apos;s Build a Better Future Together
           </p>
           <Link
-            href="mailto:hello@venaticconsulting.com"
+            href="/contact"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-navy-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
           >
             Get in Touch

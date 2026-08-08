@@ -26,7 +26,7 @@ export default function WhoWeWorkWith() {
             meaningful transformation and sustainable growth.
           </p>
           <Link
-            href="#about"
+            href="/about"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-800"
           >
             Know More About Us
