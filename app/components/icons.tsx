@@ -88,6 +88,16 @@ export function IconLaptop({ className = base }: IconProps) {
   );
 }
 
+export function IconDocument({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
+      <path d="M7 3h7l4 4v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
+      <path d="M14 3v4h4" />
+      <path d="M9 13h6M9 16.5h6M9 9.5h2" />
+    </svg>
+  );
+}
+
 export function IconLandmark({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
@@ -159,6 +169,14 @@ export function IconNetwork({ className = base }: IconProps) {
       <circle cx="19" cy="6" r="2.2" />
       <circle cx="12" cy="18" r="2.2" />
       <path d="M6.8 7.4 10.5 16M17.2 7.4 13.5 16M7.2 6h9.6" />
+    </svg>
+  );
+}
+
+export function IconChevronDown({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}>
+      <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

@@ -28,42 +28,117 @@ export const heroFeatures = [
 
 export const services = [
   {
-    slug: "strategy-growth",
-    title: "Strategy & Growth",
+    slug: "recruiting",
+    title: "Recruiting",
     description:
-      "Market entry, growth strategies, business model innovation and commercial due diligence.",
+      "Sourcing and placing specialists across industries, from entry-level roles to senior management hires.",
   },
   {
-    slug: "operations-excellence",
-    title: "Operations Excellence",
+    slug: "outsourcing",
+    title: "Outsourcing",
     description:
-      "Process optimization, cost reduction, supply chain improvement and performance enhancement.",
+      "Staffing, training and BPO support that lets you scale your team without the overhead.",
   },
   {
-    slug: "finance-performance",
-    title: "Finance & Performance",
+    slug: "us-tax",
+    title: "US Tax Consulting",
     description:
-      "Financial planning, KPI frameworks, reporting systems and performance management.",
+      "Individual tax preparation and IRS-compliant filing support, from e-filing to audit representation.",
   },
   {
-    slug: "organization-people",
-    title: "Organization & People",
+    slug: "application-development",
+    title: "Application Development",
     description:
-      "Organization design, change management, talent strategy and leadership development.",
-  },
-  {
-    slug: "digital-transformation",
-    title: "Digital Transformation",
-    description:
-      "Digital strategy, technology advisory, data analytics and innovation enablement.",
-  },
-  {
-    slug: "government-advisory",
-    title: "Government Advisory",
-    description:
-      "Public policy, program evaluation, institutional strengthening and capacity building.",
+      "Custom application development, maintenance and modernization for growing digital platforms.",
   },
 ];
+
+export const taxConsulting = {
+  intro: [
+    "Venatic has expertise in US Tax consulting, specifically with individual tax preparation.",
+    "Guidance across the full range of tax return services within IRS laws and terms.",
+  ],
+  services: [
+    "Federal & State e-filing",
+    "ITIN Preparation",
+    "FBAR & FATCA compliance",
+    "Amendment filing",
+    "Audit Representation",
+    "Extension filings",
+  ],
+  pricing: [
+    { label: "Federal and State", price: "$75" },
+    { label: "Federal and Multiple States", price: "$100" },
+    { label: "Schedule D", price: "$40" },
+    { label: "Schedule A", price: "$50" },
+    { label: "Schedule E", price: "$40" },
+    { label: "Schedule C (with expenses)", price: "$100" },
+    { label: "ITIN Application (each)", price: "$50" },
+    { label: "FBAR & FATCA", price: "Free" },
+  ],
+  note: "Venatic Consulting focuses on IRS laws and terms to give an appropriate service to our clients — we work on a long-term basis.",
+};
+
+export const outsourcing = {
+  intro:
+    "We help businesses scale their teams with recruiting, training and back-office support.",
+  items: [
+    {
+      title: "Staffing / Recruiting",
+      description:
+        "Recruiting specialists for all industries and job types, from entry-level positions to high-level management roles. We work with businesses of every size, so there's always a good fit.",
+    },
+    {
+      title: "Training on Various Platforms",
+      description:
+        "Training new hires with the skills they need, delivered by industry experts.",
+    },
+    {
+      title: "BPO",
+      description: "We empower individuals and companies across the world.",
+    },
+  ],
+  tagline: "Learn from our best practices and be part of our success story.",
+};
+
+export const appDev = {
+  description:
+    "In this competitive market, it requires the enterprise to design and manage the application. We collaborate with you to understand your business, processes and applications. Our application development and maintenance solution drive efficiency and effectiveness which help you to build adaptable platform for new social and other enterprises. By redesigning applications, enterprises can become agiler while enriching customer experiences in a secure environment. We collaborate with you to understand your business, processes and applications.",
+  helpsTitle: "How Our Application Services helps you",
+  helps: [
+    "To Increase the value of applications.",
+    "Provide application resiliency.",
+    "Application Simplification.",
+    "Adopt next generation applications.",
+    "Bring innovation to the forefront.",
+  ],
+};
+
+export const appSecurity = {
+  description:
+    "The need for VAPT has been increasing with the exposed data and increased security threats. Be it a big enterprise or a Medium one, every business involved in a large data eco system must maintain security and this part requires the Penetration testing expertise.",
+  vulnerabilityAssessment:
+    "This part aims at discovering and exposing the network of various web applications and the loopholes in its security.",
+  penetrationTesting:
+    "Penetration Testing is a hacking attempt that aims to check how the system will fare in case of a real-time hacking. All the vulnerabilities that were exposed earlier are confirmed during the Penetration Testing. During this orchestrated malware infection and hacking attempt, we get a complete picture of how our existing infrastructure will act if it comes under seize.",
+  testingTypes: [
+    {
+      title: "Black Box Testing",
+      description:
+        "In this type of testing the experts try to invade into a company's system in a manner where the hacker would not have any advanced knowledge of the systems and networks involved in the company's system.",
+    },
+    {
+      title: "Gray Box Testing",
+      description:
+        "In this type of testing, the experts invade a system with some semblance of information about the company's internal systems and networks. Here a common method that is used is a mixture of black-box testing and white box testing.",
+    },
+    {
+      title: "White Box Testing",
+      description:
+        "Here the experts perform VAPT from inside the internal network of the company itself. This time the experts make use of all knowledge about the systems and network architecture.",
+    },
+  ],
+};
 
 export const caseStudies = [
   {

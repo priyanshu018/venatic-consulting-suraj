@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import PageHero from "../../components/PageHero";
 import Services from "../../components/Services";
+import TaxConsultingSection from "../../components/TaxConsultingSection";
+import OutsourcingSection from "../../components/OutsourcingSection";
+import AppDevSection from "../../components/AppDevSection";
+import AppSecuritySection from "../../components/AppSecuritySection";
 import StatsCta from "../../components/StatsCta";
 
 export const metadata: Metadata = {
@@ -18,6 +22,10 @@ export default function ServicesPage() {
         description="From strategy through execution, our practice areas cover every stage of organizational growth and transformation."
       />
       <Services />
+      <TaxConsultingSection />
+      <OutsourcingSection />
+      <AppDevSection />
+      <AppSecuritySection />
       <StatsCta />
     </>
   );

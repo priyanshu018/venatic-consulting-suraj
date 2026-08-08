@@ -1,23 +1,8 @@
 import Link from "next/link";
 import { services } from "./content";
-import {
-  IconArrowRight,
-  IconTrendUp,
-  IconGear,
-  IconPieChart,
-  IconPeople,
-  IconLaptop,
-  IconLandmark,
-} from "./icons";
+import { IconArrowRight, IconBriefcase, IconGlobe, IconDocument, IconLaptop } from "./icons";
 
-const serviceIcons = [
-  IconTrendUp,
-  IconGear,
-  IconPieChart,
-  IconPeople,
-  IconLaptop,
-  IconLandmark,
-];
+const serviceIcons = [IconBriefcase, IconGlobe, IconDocument, IconLaptop];
 
 export default function Services() {
   return (
@@ -32,14 +17,13 @@ export default function Services() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => {
             const Icon = serviceIcons[i];
             return (
               <div
                 key={service.title}
-                id={service.slug}
-                className="scroll-mt-24 rounded-2xl border border-navy-900/10 p-5 transition-shadow hover:shadow-lg"
+                className="rounded-2xl border border-navy-900/10 p-6 transition-shadow hover:shadow-lg"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-900 text-gold-400">
                   <Icon className="h-5 w-5" />
@@ -47,7 +31,7 @@ export default function Services() {
                 <h3 className="mt-4 text-base font-bold text-navy-900">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-navy-900/65">
+                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">
                   {service.description}
                 </p>
                 <Link
