@@ -20,6 +20,41 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Admin panel (live stats)
+
+The Countries / Projects / Clients numbers shown on the site are editable from
+`/admin` instead of being hardcoded. Without any setup, the site falls back to
+default numbers (2 / 25 / 20) and the admin panel is unusable — you need a
+Postgres database to actually manage them.
+
+1. **Get a Postgres database.** Any provider works (this repo doesn't need
+   anything special) — [Neon](https://neon.tech) and
+   [Supabase](https://supabase.com) both have free tiers and give you a
+   connection string in under a minute. On Vercel, use your provider's
+   **pooled** connection string (e.g. Neon's `-pooler` host, or Supabase's
+   port `6543`) since serverless functions open a lot of short-lived
+   connections.
+2. **Copy the env file:** `cp .env.local.example .env.local` and fill in:
+   - `DATABASE_URL` — the connection string from step 1.
+   - `SESSION_SECRET` — a random secret for signing the admin login session.
+     Generate one with `openssl rand -base64 32`.
+   - `ADMIN_EMAIL` / `ADMIN_PASSWORD` — the login you'll use to sign in to
+     `/admin`. These two are only read by the seed script below, not by the
+     running app.
+3. **Create the schema and the admin login:**
+   ```bash
+   pnpm seed:admin
+   ```
+   This creates the `admin_users` and `site_stats` tables if they don't
+   exist yet, seeds `site_stats` with the default numbers, and creates (or
+   updates) the admin account from `ADMIN_EMAIL` / `ADMIN_PASSWORD`.
+4. **Sign in at [http://localhost:3000/admin](http://localhost:3000/admin/login)**
+   and update the numbers. Changes apply immediately on the live site.
+
+Re-run `pnpm seed:admin` any time to reset the admin password, or to point a
+new environment (e.g. production) at the same credentials — it's safe to run
+repeatedly.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -1,26 +1,47 @@
 import Link from "next/link";
-import { closingStats } from "./content";
-import { IconArrowRight } from "./icons";
+import { IconArrowRight, IconGlobe, IconPeople, IconBriefcase } from "./icons";
 import Counter from "./Counter";
+import { getStats } from "@/lib/stats";
 
-export default function StatsCta() {
+const statIcons = [IconGlobe, IconPeople, IconBriefcase];
+
+export default async function StatsCta() {
+  const dbStats = await getStats();
+  const closingStats = [
+    { value: `${dbStats.countries}+`, label: "Countries Served" },
+    { value: `${dbStats.projects}+`, label: "Projects Delivered" },
+    { value: `${dbStats.clients}+`, label: "Client Partnerships" },
+  ];
+
   return (
     <section className="bg-navy-950">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-        <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 divide-x divide-white/10">
-          {closingStats.map((stat) => (
-            <div key={stat.label} className="px-6 text-center first:pl-0">
-              <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
-                <Counter value={stat.value} />
-              </p>
-              <p className="mt-1 text-xs font-medium text-white/70">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+      <div className="mx-auto flex max-w-7xl flex-col lg:flex-row lg:items-stretch">
+        <div className="flex flex-1 flex-wrap items-center justify-center gap-x-10 gap-y-6 divide-white/10 px-6 py-8 sm:justify-start sm:divide-x lg:px-10">
+          {closingStats.map((stat, i) => {
+            const Icon = statIcons[i];
+            return (
+              <div
+                key={stat.label}
+                className="flex items-center gap-3 pl-0 sm:pl-10 sm:first:pl-0"
+              >
+                <Icon className="h-8 w-8 shrink-0 text-gold-400" />
+                <div>
+                  <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
+                    <Counter value={stat.value} />
+                  </p>
+                  <p className="mt-0.5 text-xs font-medium text-white/70">
+                    {stat.label}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl bg-gold-500 px-8 py-6">
+        <div
+          className="flex flex-wrap items-center justify-between gap-6 bg-gold-500 px-8 py-8 lg:px-12"
+          style={{ clipPath: "polygon(28px 0, 100% 0, 100% 100%, 0 100%)" }}
+        >
           <p className="text-lg font-extrabold text-navy-900 sm:text-xl">
             Let&apos;s Build a Better Future Together
           </p>

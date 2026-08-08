@@ -21,7 +21,7 @@ const serviceIcons = [
 
 export default function Services() {
   return (
-    <section className="bg-white px-6 py-20 lg:px-10">
+    <section className="relative z-10 -mt-12 rounded-t-[3rem] bg-white px-6 pb-20 pt-16 shadow-[0_-24px_48px_-32px_rgba(10,26,51,0.35)] lg:-mt-16 lg:rounded-t-[4rem] lg:px-10 lg:pt-20">
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <p className="text-xs font-bold tracking-[0.25em] text-gold-500">
@@ -32,27 +32,27 @@ export default function Services() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
           {services.map((service, i) => {
             const Icon = serviceIcons[i];
             return (
               <div
                 key={service.title}
                 id={service.slug}
-                className="scroll-mt-24 rounded-2xl border border-navy-900/10 p-8 transition-shadow hover:shadow-lg"
+                className="scroll-mt-24 rounded-2xl border border-navy-900/10 p-5 transition-shadow hover:shadow-lg"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-navy-900 text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-navy-900 text-gold-400">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-navy-900">
+                <h3 className="mt-4 text-base font-bold text-navy-900">
                   {service.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-900/65">
+                <p className="mt-2 text-xs leading-relaxed text-navy-900/65">
                   {service.description}
                 </p>
                 <Link
                   href={`/services#${service.slug}`}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-500"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-500"
                 >
                   Learn More
                   <IconArrowRight />

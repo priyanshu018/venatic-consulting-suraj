@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import PageHero from "../components/PageHero";
-import WhoWeWorkWith from "../components/WhoWeWorkWith";
-import StatsCta from "../components/StatsCta";
-import Counter from "../components/Counter";
-import { heroStats, heroFeatures } from "../components/content";
-import { IconGlobe, IconChartLine, IconCheckShield } from "../components/icons";
+import PageHero from "../../components/PageHero";
+import WhoWeWorkWith from "../../components/WhoWeWorkWith";
+import StatsCta from "../../components/StatsCta";
+import Counter from "../../components/Counter";
+import { heroFeatures } from "../../components/content";
+import { IconGlobe, IconChartLine, IconCheckShield } from "../../components/icons";
+import { getStats } from "@/lib/stats";
 
 export const metadata: Metadata = {
   title: "About Us | Venatic Consulting",
@@ -12,9 +13,18 @@ export const metadata: Metadata = {
     "Learn about Venatic Consulting — a global advisory partner helping organizations solve complex challenges through strategy, insight and execution.",
 };
 
+export const dynamic = "force-dynamic";
+
 const valueIcons = [IconGlobe, IconChartLine, IconCheckShield];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const dbStats = await getStats();
+  const stats = [
+    { value: `${dbStats.countries}+`, label: "Countries" },
+    { value: `${dbStats.projects}+`, label: "Projects" },
+    { value: `${dbStats.clients}+`, label: "Clients" },
+  ];
+
   return (
     <>
       <PageHero
@@ -49,7 +59,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 lg:grid-cols-1">
-            {heroStats.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-2xl border border-navy-900/10 p-6 text-center lg:flex lg:items-center lg:justify-between lg:text-left"

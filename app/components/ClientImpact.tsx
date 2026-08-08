@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { testimonials } from "./content";
-import { IconArrowRight, IconChevron, IconQuote } from "./icons";
+import { IconArrowRight, IconChevron } from "./icons";
 
 export default function ClientImpact() {
   const [start, setStart] = useState(0);
@@ -47,9 +47,11 @@ export default function ClientImpact() {
                 key={testimonial.quote}
                 className="flex flex-col rounded-2xl border border-navy-900/10 bg-white p-6"
               >
-                <IconQuote className="h-6 w-6 text-gold-500" />
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-navy-900/75">
-                  &ldquo;{testimonial.quote}&rdquo;
+                <span className="font-serif text-2xl leading-none text-gold-500">
+                  &ldquo;
+                </span>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-navy-900/75">
+                  {testimonial.quote}
                 </p>
                 <p className="mt-5 text-sm font-bold text-navy-900">
                   {testimonial.attribution}

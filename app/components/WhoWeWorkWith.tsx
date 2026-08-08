@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { workWithCards } from "./content";
 import {
@@ -40,19 +41,29 @@ export default function WhoWeWorkWith() {
             return (
               <div
                 key={card.title}
-                className="relative overflow-hidden rounded-2xl bg-navy-900 p-6"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(160deg, #16305a 0%, #0e2140 70%)",
-                }}
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
               >
-                <Icon className="h-7 w-7 text-gold-400" />
-                <h3 className="mt-4 text-base font-bold text-white">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-white/70">
-                  {card.description}
-                </p>
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/40 to-navy-950/10" />
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-navy-900/80">
+                    <Icon className="h-4 w-4 text-gold-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white">
+                      {card.title}
+                    </h3>
+                    <p className="mt-1 text-xs leading-relaxed text-white/75">
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}

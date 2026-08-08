@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "../components/PageHero";
-import { IconArrowRight, IconGlobe, IconChartLine, IconCheckShield } from "../components/icons";
+import PageHero from "../../components/PageHero";
+import { IconArrowRight, IconGlobe, IconChartLine, IconCheckShield } from "../../components/icons";
 
 export const metadata: Metadata = {
   title: "Careers | Venatic Consulting",

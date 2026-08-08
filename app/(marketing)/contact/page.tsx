@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import PageHero from "../components/PageHero";
-import ContactSection from "../components/ContactSection";
+import PageHero from "../../components/PageHero";
+import ContactSection from "../../components/ContactSection";
 
 export const metadata: Metadata = {
   title: "Contact Us | Venatic Consulting",

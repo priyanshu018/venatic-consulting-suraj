@@ -1,13 +1,101 @@
 import Link from "next/link";
 import { IconArrowRight } from "./icons";
 
+function AdaniMark() {
+  return (
+    <span
+      className="text-xl font-extrabold italic tracking-tight"
+      style={{
+        backgroundImage: "linear-gradient(90deg,#e5352b,#8c3494,#0f5ba7)",
+        WebkitBackgroundClip: "text",
+        backgroundClip: "text",
+        color: "transparent",
+      }}
+    >
+      adani
+    </span>
+  );
+}
+
+function VedantaMark() {
+  return (
+    <div className="flex items-center gap-2">
+      <svg viewBox="0 0 24 24" className="h-6 w-6">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#0f9d58" strokeWidth="1.6" />
+        <circle cx="12" cy="7" r="1.6" fill="#f4a300" />
+        <circle cx="16.5" cy="14" r="1.6" fill="#0f9d58" />
+        <circle cx="7.5" cy="14" r="1.6" fill="#1a73c7" />
+      </svg>
+      <div className="text-left leading-tight">
+        <p className="text-lg font-extrabold text-emerald-700">vedanta</p>
+        <p className="text-[9px] font-medium text-navy-900/40">
+          transforming for good
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TataMark() {
+  return (
+    <span className="text-xl font-extrabold tracking-tight text-blue-900">
+      TATA
+    </span>
+  );
+}
+
+function MahindraMark() {
+  return (
+    <div className="text-left leading-tight">
+      <p className="text-lg font-extrabold tracking-tight text-red-600">
+        Mahindra
+      </p>
+      <p className="-mt-0.5 text-[10px] font-semibold italic text-navy-900/40">
+        Rise.
+      </p>
+    </div>
+  );
+}
+
+function RelianceMark() {
+  return (
+    <div className="flex items-center gap-2">
+      <svg viewBox="0 0 24 24" className="h-6 w-6">
+        <path
+          d="M12 2c2.5 3 4 6 4 9a4 4 0 1 1-8 0c0-3 1.5-6 4-9Z"
+          fill="#c9973f"
+        />
+      </svg>
+      <div className="text-left leading-tight">
+        <p className="text-base font-extrabold text-navy-900">Reliance</p>
+        <p className="-mt-0.5 text-[9px] font-medium text-navy-900/40">
+          Industries Limited
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AxisMark() {
+  return (
+    <div className="flex items-center gap-2">
+      <svg viewBox="0 0 24 24" className="h-6 w-6">
+        <path d="M4 19 12 4l8 15h-4l-4-8-4 8Z" fill="#97144d" />
+      </svg>
+      <span className="text-lg font-extrabold tracking-wide text-rose-900">
+        AXIS BANK
+      </span>
+    </div>
+  );
+}
+
 const logos = [
-  { name: "adani", className: "text-red-600" },
-  { name: "vedanta", className: "text-emerald-600" },
-  { name: "TATA", className: "text-blue-800" },
-  { name: "Mahindra", className: "text-red-500" },
-  { name: "Reliance", className: "text-navy-900" },
-  { name: "AXIS BANK", className: "text-rose-800" },
+  { name: "adani", Mark: AdaniMark },
+  { name: "vedanta", Mark: VedantaMark },
+  { name: "TATA", Mark: TataMark },
+  { name: "Mahindra", Mark: MahindraMark },
+  { name: "Reliance", Mark: RelianceMark },
+  { name: "AXIS BANK", Mark: AxisMark },
 ];
 
 const track = [...logos, ...logos];
@@ -29,11 +117,9 @@ export default function Partners() {
           {track.map((logo, i) => (
             <div
               key={`${logo.name}-${i}`}
-              className="flex h-16 w-40 shrink-0 items-center justify-center rounded-xl border border-navy-900/10 bg-white"
+              className="flex h-20 w-48 shrink-0 items-center justify-center rounded-xl border border-navy-900/10 bg-white px-4"
             >
-              <span className={`text-lg font-extrabold tracking-tight ${logo.className}`}>
-                {logo.name}
-              </span>
+              <logo.Mark />
             </div>
           ))}
         </div>

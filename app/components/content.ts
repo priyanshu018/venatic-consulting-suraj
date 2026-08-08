@@ -1,6 +1,5 @@
-// TODO: replace with the real WhatsApp Business number (digits only, with country code)
-export const whatsappNumber = "910000000000";
-export const whatsappDisplay = "+91 00000 00000";
+export const whatsappNumber = "919989056977";
+export const whatsappDisplay = "+91 99890 56977";
 
 export const navLinks = [
   { label: "Home", href: "/" },
@@ -9,12 +8,6 @@ export const navLinks = [
   { label: "Clients", href: "/clients" },
   { label: "Resources", href: "/resources" },
   { label: "Careers", href: "/careers" },
-];
-
-export const heroStats = [
-  { value: "20+", label: "Countries" },
-  { value: "250+", label: "Projects" },
-  { value: "150+", label: "Clients" },
 ];
 
 export const heroFeatures = [
@@ -85,21 +78,25 @@ export const partnerLogos = [
 export const workWithCards = [
   {
     title: "Corporates",
+    image: "/images/corporates.jpg",
     description:
       "Partnering with industry leaders to unlock growth and operational excellence.",
   },
   {
     title: "Government & Public Sector",
+    image: "/images/government.jpg",
     description:
       "Supporting governments and public institutions in policy design and capacity building.",
   },
   {
     title: "Development Partners",
+    image: "/images/development-partners.jpg",
     description:
       "Working with multilaterals and NGOs to deliver impact-driven solutions for sustainable development.",
   },
   {
     title: "Startups & SMEs",
+    image: "/images/startups.jpg",
     description:
       "Empowering startups and SMEs with strategic guidance to scale, innovate and succeed.",
   },
@@ -124,10 +121,4 @@ export const testimonials = [
     attribution: "Director",
     company: "Reliance Industries Limited",
   },
-];
-
-export const closingStats = [
-  { value: "20+", label: "Countries Served" },
-  { value: "250+", label: "Projects Delivered" },
-  { value: "150+", label: "Client Partnerships" },
 ];

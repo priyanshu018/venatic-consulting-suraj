@@ -1,101 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
-import { heroFeatures, heroStats } from "./content";
+import { heroFeatures } from "./content";
 import { IconArrowRight, IconCheckShield, IconChartLine, IconGlobe } from "./icons";
 import Counter from "./Counter";
+import { getStats } from "@/lib/stats";
 
 const featureIcons = [IconGlobe, IconChartLine, IconCheckShield];
 
-const buildings = [
-  { x: 20, w: 55, h: 150 },
-  { x: 85, w: 40, h: 200 },
-  { x: 135, w: 50, h: 130 },
-  { x: 195, w: 35, h: 230 },
-  { x: 240, w: 65, h: 170 },
-  { x: 315, w: 45, h: 260 },
-  { x: 370, w: 55, h: 150 },
-  { x: 435, w: 40, h: 190 },
-  { x: 485, w: 60, h: 140 },
-  { x: 555, w: 45, h: 220 },
-  { x: 610, w: 55, h: 170 },
-  { x: 675, w: 50, h: 210 },
-  { x: 735, w: 40, h: 140 },
-];
-
-function buildingWindows(b: (typeof buildings)[number], seed: number) {
-  const rows = Math.floor(b.h / 22);
-  const cols = Math.max(2, Math.floor(b.w / 16));
-  const windows = [];
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const lit = (r * cols + c + seed) % 3 === 0;
-      if (!lit) continue;
-      windows.push(
-        <rect
-          key={`${r}-${c}`}
-          x={b.x + 8 + c * 14}
-          y={300 - b.h + 14 + r * 22}
-          width={6}
-          height={9}
-          fill="#e9c887"
-          opacity={0.7}
-        />
-      );
-    }
-  }
-  return windows;
-}
-
-function HeroVisual() {
+function HeroVisual({ stats }: { stats: { value: string; label: string }[] }) {
   return (
     <>
       <div className="clip-hero absolute inset-0 overflow-hidden bg-navy-900">
-        <svg
-          className="absolute inset-0 h-full w-full"
-          viewBox="0 0 800 500"
-          preserveAspectRatio="xMidYMax slice"
-        >
-          <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#1c3a67" />
-              <stop offset="45%" stopColor="#142c52" />
-              <stop offset="100%" stopColor="#0a1a33" />
-            </linearGradient>
-            <radialGradient id="glow" cx="78%" cy="38%" r="55%">
-              <stop offset="0%" stopColor="#f0c877" stopOpacity="0.55" />
-              <stop offset="100%" stopColor="#f0c877" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <rect width="800" height="500" fill="url(#sky)" />
-          <rect width="800" height="500" fill="url(#glow)" />
-          <g opacity="0.5">
-            {buildings.slice(2, 9).map((b, i) => (
-              <rect
-                key={`back-${i}`}
-                x={b.x - 10}
-                y={200 - b.h * 0.6}
-                width={b.w}
-                height={b.h * 0.6 + 100}
-                fill="#0a1a33"
-              />
-            ))}
-          </g>
-          <g>
-            {buildings.map((b, i) => (
-              <g key={i}>
-                <rect x={b.x} y={300 - b.h} width={b.w} height={b.h} fill="#0a1a33" />
-                {buildingWindows(b, i)}
-              </g>
-            ))}
-          </g>
-          <rect y="298" width="800" height="4" fill="#0a1a33" />
-        </svg>
-        <div className="absolute right-10 top-10 h-px w-28 rotate-45 bg-gold-400/50" />
-        <div className="absolute right-28 top-24 h-px w-16 rotate-45 bg-gold-400/30" />
+        <Image
+          src="/images/hero-skyline.jpg"
+          alt="City skyline at sunset"
+          fill
+          priority
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/35 via-transparent to-transparent" />
+        <div className="absolute right-10 top-10 h-px w-28 rotate-45 bg-gold-400/60" />
+        <div className="absolute right-28 top-24 h-px w-16 rotate-45 bg-gold-400/35" />
       </div>
       <div className="clip-hero-line absolute inset-0 bg-gold-500" />
 
       <div className="absolute bottom-8 left-4 z-10 flex divide-x divide-white/15 rounded-2xl bg-navy-950 px-6 py-6 shadow-xl sm:left-8 sm:px-10">
-        {heroStats.map((stat) => (
+        {stats.map((stat) => (
           <div key={stat.label} className="px-4 text-center first:pl-0 last:pr-0 sm:px-6">
             <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">
               <Counter value={stat.value} />
@@ -108,7 +40,14 @@ function HeroVisual() {
   );
 }
 
-export default function Hero() {
+export default async function Hero() {
+  const dbStats = await getStats();
+  const stats = [
+    { value: `${dbStats.countries}+`, label: "Countries" },
+    { value: `${dbStats.projects}+`, label: "Projects" },
+    { value: `${dbStats.clients}+`, label: "Clients" },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-cream-50">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
@@ -163,13 +102,13 @@ export default function Hero() {
 
         {/* mobile/tablet: image sits in normal flow, full width */}
         <div className="relative min-h-[420px] lg:hidden">
-          <HeroVisual />
+          <HeroVisual stats={stats} />
         </div>
       </div>
 
       {/* desktop: image bleeds from viewport center to the right edge */}
       <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block">
-        <HeroVisual />
+        <HeroVisual stats={stats} />
       </div>
     </section>
   );

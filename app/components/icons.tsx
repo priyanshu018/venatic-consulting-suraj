@@ -33,9 +33,19 @@ export function IconCheckShield({ className = base }: IconProps) {
 
 export function IconTrendUp({ className = base }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
-      <path d="M3 17l6-6 4 4 8-8" />
-      <path d="M15 7h6v6" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M4.5 19V13.5" />
+      <path d="M10.5 19V9" />
+      <path d="M16.5 19V6" />
+      <path d="M13.5 8.5 16.5 5.5 19.5 8.5" />
     </svg>
   );
 }
@@ -52,8 +62,8 @@ export function IconGear({ className = base }: IconProps) {
 export function IconPieChart({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
-      <path d="M12 3v9l7.8 4.5" />
-      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="8.2" />
+      <path d="M12 3.8V12h8.2" fill="currentColor" fillOpacity={0.85} strokeLinejoin="round" />
     </svg>
   );
 }
@@ -191,6 +201,16 @@ export function IconMail({ className = base }: IconProps) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
       <rect x="3" y="5" width="18" height="14" rx="1.4" />
       <path d="m4 6.5 8 6 8-6" />
+    </svg>
+  );
+}
+
+export function IconBriefcase({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
+      <rect x="3" y="7.5" width="18" height="12" rx="1.6" />
+      <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5" />
+      <path d="M3 12.5h18M10.7 12v1.4h2.6V12" />
     </svg>
   );
 }

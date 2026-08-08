@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import PageHero from "../components/PageHero";
-import Services from "../components/Services";
-import StatsCta from "../components/StatsCta";
+import PageHero from "../../components/PageHero";
+import Services from "../../components/Services";
+import StatsCta from "../../components/StatsCta";
 
 export const metadata: Metadata = {
   title: "Services | Venatic Consulting",

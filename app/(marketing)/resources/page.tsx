@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "../components/PageHero";
-import { IconArrowRight } from "../components/icons";
+import PageHero from "../../components/PageHero";
+import { IconArrowRight } from "../../components/icons";
 
 export const metadata: Metadata = {
   title: "Resources | Venatic Consulting",

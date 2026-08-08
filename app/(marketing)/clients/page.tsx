@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import PageHero from "../components/PageHero";
-import Industries from "../components/Industries";
-import Partners from "../components/Partners";
-import ClientImpact from "../components/ClientImpact";
-import StatsCta from "../components/StatsCta";
+import PageHero from "../../components/PageHero";
+import Industries from "../../components/Industries";
+import Partners from "../../components/Partners";
+import ClientImpact from "../../components/ClientImpact";
+import StatsCta from "../../components/StatsCta";
 
 export const metadata: Metadata = {
   title: "Our Clients | Venatic Consulting",
