@@ -16,13 +16,13 @@ export default async function StatsCta() {
   return (
     <section className="bg-navy-950">
       <div className="mx-auto flex max-w-7xl flex-col lg:flex-row lg:items-stretch">
-        <div className="flex flex-1 flex-wrap items-center justify-center gap-x-10 gap-y-6 divide-white/10 px-6 py-8 sm:justify-start sm:divide-x lg:px-10">
+        <div className="grid flex-1 grid-cols-1 divide-y divide-white/10 px-6 py-8 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:px-10">
           {closingStats.map((stat, i) => {
             const Icon = statIcons[i];
             return (
               <div
                 key={stat.label}
-                className="flex items-center gap-3 pl-0 sm:pl-10 sm:first:pl-0"
+                className="flex items-center gap-3 py-5 first:pt-0 last:pb-0 sm:px-8 sm:py-0 sm:first:pl-0 sm:last:pr-0"
               >
                 <Icon className="h-8 w-8 shrink-0 text-gold-400" />
                 <div>

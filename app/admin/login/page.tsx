@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useActionState } from "react";
 import { login } from "@/app/actions/auth";
-import { IconArrowRight, IconLogoMark } from "@/app/components/icons";
+import { IconArrowRight } from "@/app/components/icons";
 
 export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState(login, undefined);
@@ -10,12 +11,16 @@ export default function AdminLoginPage() {
   return (
     <div className="flex min-h-[calc(100vh-1px)] items-center justify-center bg-cream-50 px-6 py-16">
       <div className="w-full max-w-sm rounded-2xl border border-navy-900/10 bg-white p-8 shadow-sm">
-        <div className="flex items-center gap-2">
-          <IconLogoMark />
-          <span className="text-lg font-extrabold tracking-tight text-navy-900">
-            Admin
-          </span>
-        </div>
+        <Image
+          src="/logo.png"
+          alt="Venatic Consulting"
+          width={557}
+          height={142}
+          className="h-8 w-auto"
+        />
+        <p className="mt-1 text-xs font-bold tracking-[0.2em] text-navy-900/50">
+          ADMIN
+        </p>
         <h1 className="mt-6 text-xl font-bold text-navy-900">Sign in</h1>
         <p className="mt-1 text-sm text-navy-900/60">
           Manage the site&apos;s live statistics.

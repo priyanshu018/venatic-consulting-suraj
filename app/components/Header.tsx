@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks } from "./content";
-import { IconArrowRight, IconLogoMark } from "./icons";
+import { IconArrowRight } from "./icons";
 
 export default function Header() {
   const pathname = usePathname();
@@ -11,14 +12,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-cream-50/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <Link href="/" className="flex items-center gap-2">
-          <IconLogoMark />
-          <span className="text-2xl font-extrabold tracking-tight text-navy-900">
-            VENATIC
-          </span>
-          <span className="hidden text-xs font-semibold tracking-[0.3em] text-gold-500 sm:inline">
-            CONSULTING
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Venatic Consulting"
+            width={557}
+            height={142}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

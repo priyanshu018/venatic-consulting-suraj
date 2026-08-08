@@ -1,6 +1,16 @@
 export const whatsappNumber = "919989056977";
 export const whatsappDisplay = "+91 99890 56977";
 
+export const contactEmail = "support@venaticconsulting.com";
+
+export const phoneNumbers = [
+  { display: "+1 (904) 606-4084", href: "tel:+19046064084", country: "US" },
+  { display: "+91 99890 56977", href: "tel:+919989056977", country: "IN" },
+];
+
+export const officeAddress =
+  "D.No 1-65/469, PM&BS Square, Avenue 1, Kakatiya Hills, Madhapur, Telangana 500081";
+
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
@@ -52,6 +62,30 @@ export const services = [
     title: "Government Advisory",
     description:
       "Public policy, program evaluation, institutional strengthening and capacity building.",
+  },
+];
+
+export const caseStudies = [
+  {
+    tag: "STRATEGY",
+    image: "/images/corporates.jpg",
+    title: "35% Faster Market Entry for a Global Retail Group",
+    description:
+      "Structured market-entry strategy and commercial due diligence helped the client launch in three new markets ahead of schedule.",
+  },
+  {
+    tag: "OPERATIONS",
+    image: "/images/startups.jpg",
+    title: "22% Cost Reduction Through Process Redesign",
+    description:
+      "End-to-end process optimization and supply chain redesign cut operating costs while improving delivery reliability.",
+  },
+  {
+    tag: "DIGITAL",
+    image: "/images/development-partners.jpg",
+    title: "Scaled Digital Operations Across 3 New Markets",
+    description:
+      "A phased digital transformation roadmap and data analytics rollout enabled consistent operations across new regions.",
   },
 ];
 

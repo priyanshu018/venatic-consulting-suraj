@@ -215,11 +215,10 @@ export function IconBriefcase({ className = base }: IconProps) {
   );
 }
 
-export function IconLogoMark({ className = "h-7 w-7" }: IconProps) {
+export function IconPhone({ className = base }: IconProps) {
   return (
-    <svg viewBox="0 0 32 32" className={className}>
-      <path d="M2 4 14 28 16 24 6 4Z" fill="#c9973f" />
-      <path d="M30 4 18 28 14.5 21 22.5 4Z" fill="#0e2140" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className={className}>
+      <path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2C10.5 18 6 13.5 5 6.2A2 2 0 0 1 6.5 3Z" />
     </svg>
   );
 }

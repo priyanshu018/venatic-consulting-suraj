@@ -1,17 +1,24 @@
 import ContactForm from "./ContactForm";
-import { IconMail, IconMapPin, IconLinkedIn } from "./icons";
+import { IconMail, IconMapPin, IconPhone, IconLinkedIn } from "./icons";
+import { contactEmail, phoneNumbers, officeAddress } from "./content";
 
 const contactMethods = [
   {
     icon: IconMail,
     label: "Email Us",
-    value: "hello@venaticconsulting.com",
-    href: "mailto:hello@venaticconsulting.com",
+    value: contactEmail,
+    href: `mailto:${contactEmail}`,
   },
+  ...phoneNumbers.map((phone) => ({
+    icon: IconPhone,
+    label: `Call Us (${phone.country})`,
+    value: phone.display,
+    href: phone.href,
+  })),
   {
     icon: IconMapPin,
-    label: "Global Offices",
-    value: "20+ Countries Worldwide",
+    label: "Office",
+    value: officeAddress,
     href: undefined,
   },
   {
@@ -59,7 +66,7 @@ export default function ContactSection({
                     <p className="text-xs font-semibold uppercase tracking-wide text-navy-900/50">
                       {method.label}
                     </p>
-                    <p className="text-sm font-semibold text-navy-900">
+                    <p className="text-sm font-semibold leading-snug text-navy-900">
                       {method.value}
                     </p>
                   </div>

@@ -26,7 +26,7 @@ function HeroVisual({ stats }: { stats: { value: string; label: string }[] }) {
       </div>
       <div className="clip-hero-line absolute inset-0 bg-gold-500" />
 
-      <div className="absolute bottom-8 left-4 z-10 flex divide-x divide-white/15 rounded-2xl bg-navy-950 px-6 py-6 shadow-xl sm:left-8 sm:px-10">
+      <div className="absolute bottom-20 left-4 z-10 flex divide-x divide-white/15 rounded-2xl bg-navy-950 px-6 py-6 shadow-xl sm:left-8 sm:px-10 lg:bottom-24">
         {stats.map((stat) => (
           <div key={stat.label} className="px-4 text-center first:pl-0 last:pr-0 sm:px-6">
             <p className="text-2xl font-extrabold text-gold-400 sm:text-3xl">

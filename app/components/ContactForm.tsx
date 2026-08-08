@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { IconArrowRight } from "./icons";
+import { contactEmail } from "./content";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -14,7 +15,7 @@ export default function ContactForm() {
     const body = encodeURIComponent(
       `${message}\n\n— ${name}${email ? ` (${email})` : ""}`
     );
-    window.location.href = `mailto:hello@venaticconsulting.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
   }
 
   return (
@@ -67,8 +68,8 @@ export default function ContactForm() {
         <IconArrowRight />
       </button>
       <p className="mt-3 text-xs text-navy-900/50">
-        Submitting opens your email client with this message addressed to
-        hello@venaticconsulting.com.
+        Submitting opens your email client with this message addressed to{" "}
+        {contactEmail}.
       </p>
     </form>
   );
