@@ -80,6 +80,7 @@ const sections = {
   app_security: content.appSecurity,
   case_studies: content.caseStudies,
   industries: content.industries,
+  partners: content.partners,
   who_we_work_with: content.workWithCards,
   testimonials: content.testimonials,
   contact: content.contact,

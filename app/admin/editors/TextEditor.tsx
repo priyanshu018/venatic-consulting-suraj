@@ -4,7 +4,12 @@ import { useState, useTransition } from "react";
 import { updateContentSection } from "@/app/actions/content";
 import SaveStatus from "./SaveStatus";
 
-export type FieldDef = { key: string; label: string; multiline?: boolean };
+export type FieldDef = {
+  key: string;
+  label: string;
+  multiline?: boolean;
+  image?: boolean;
+};
 
 export default function TextEditor({
   sectionKey,

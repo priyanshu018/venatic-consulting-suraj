@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { updateContentSection } from "@/app/actions/content";
 import { IconArrowRight } from "@/app/components/icons";
 import SaveStatus from "./SaveStatus";
+import ImageUploadField from "./ImageUploadField";
 import type { FieldDef } from "./TextEditor";
 
 export default function ListEditor<T extends Record<string, unknown>>({
@@ -68,33 +69,43 @@ export default function ListEditor<T extends Record<string, unknown>>({
             </button>
           </div>
           <div className="mt-3 flex flex-col gap-3">
-            {fields.map((field) => (
-              <label
-                key={field.key}
-                className="flex flex-col gap-1.5 text-sm font-semibold text-navy-900"
-              >
-                {field.label}
-                {field.multiline ? (
-                  <textarea
-                    rows={2}
-                    value={(item[field.key] as string) ?? ""}
-                    onChange={(e) =>
-                      updateField(index, field.key, e.target.value)
-                    }
-                    className="resize-none rounded-lg border border-navy-900/15 px-3 py-2 text-sm font-normal text-navy-900 outline-none focus:border-navy-900/40"
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    value={(item[field.key] as string) ?? ""}
-                    onChange={(e) =>
-                      updateField(index, field.key, e.target.value)
-                    }
-                    className="rounded-lg border border-navy-900/15 px-3 py-2 text-sm font-normal text-navy-900 outline-none focus:border-navy-900/40"
-                  />
-                )}
-              </label>
-            ))}
+            {fields.map((field) =>
+              field.image ? (
+                <ImageUploadField
+                  key={field.key}
+                  label={field.label}
+                  value={(item[field.key] as string) ?? ""}
+                  onChange={(url) => updateField(index, field.key, url)}
+                  folder={sectionKey}
+                />
+              ) : (
+                <label
+                  key={field.key}
+                  className="flex flex-col gap-1.5 text-sm font-semibold text-navy-900"
+                >
+                  {field.label}
+                  {field.multiline ? (
+                    <textarea
+                      rows={2}
+                      value={(item[field.key] as string) ?? ""}
+                      onChange={(e) =>
+                        updateField(index, field.key, e.target.value)
+                      }
+                      className="resize-none rounded-lg border border-navy-900/15 px-3 py-2 text-sm font-normal text-navy-900 outline-none focus:border-navy-900/40"
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      value={(item[field.key] as string) ?? ""}
+                      onChange={(e) =>
+                        updateField(index, field.key, e.target.value)
+                      }
+                      className="rounded-lg border border-navy-900/15 px-3 py-2 text-sm font-normal text-navy-900 outline-none focus:border-navy-900/40"
+                    />
+                  )}
+                </label>
+              )
+            )}
           </div>
         </div>
       ))}

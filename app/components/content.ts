@@ -192,13 +192,13 @@ export const industries = [
   "Infrastructure",
 ];
 
-export const partnerLogos = [
-  "adani",
-  "vedanta",
-  "TATA",
-  "Mahindra",
-  "Reliance Industries Limited",
-  "AXIS BANK",
+export const partners = [
+  { name: "adani", image: "" },
+  { name: "vedanta", image: "" },
+  { name: "TATA", image: "" },
+  { name: "Mahindra", image: "" },
+  { name: "Reliance", image: "" },
+  { name: "AXIS BANK", image: "" },
 ];
 
 export const workWithCards = [

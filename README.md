@@ -24,12 +24,17 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Almost every section of the site — hero copy, the 4 service cards, US Tax
 pricing, outsourcing, application development, application security, success
-stories, industries, "Who We Work With", testimonials, and all contact
-info — is editable from `/admin` instead of being hardcoded. The 3 headline
-stats (Countries / Projects / Clients) live there too. Without any setup, the
-site falls back to the defaults baked into `app/components/content.ts` and
-the admin panel is unusable — you need Supabase configured to actually manage
-any of it.
+story photos and text, industries, partner logos, "Who We Work With", testimonials,
+and all contact info — is editable from `/admin` instead of being hardcoded.
+The 3 headline stats (Countries / Projects / Clients) live there too. Without
+any setup, the site falls back to the defaults baked into
+`app/components/content.ts` and the admin panel is unusable — you need
+Supabase configured to actually manage any of it.
+
+Image fields upload straight to Supabase Storage (a `site-images` bucket,
+created automatically on first upload) and are served from
+`*.supabase.co` — that domain is allow-listed in `next.config.ts` for
+`next/image`.
 
 1. **Create a Supabase project** at [supabase.com](https://supabase.com) (free
    tier is fine). From **Settings → API**, grab the Project URL, the `anon`
@@ -60,13 +65,11 @@ any of it.
    and edit away. Changes apply immediately on the live site — nothing to
    redeploy.
 
-A few things are intentionally **not** editable from the admin panel yet:
-photos (hero background, case study images, "Who We Work With" cards, the
-real logo files) and the partner/client logos, since none of that has file
-upload wired up — those still live in `public/` and `content.ts`. Service
-card icons and industry icons are also assigned by position in code, so
-reordering or adding items beyond the icon set reuses the first/a fallback
-icon.
+A few things are intentionally **not** editable from the admin panel: the
+hero background photo and the site logo (`public/logo.png`,
+`public/logo-mark.png`) still live in `public/`. Service card icons and
+industry icons are also assigned by position in code, so reordering or
+adding items beyond the icon set reuses the first/a fallback icon.
 
 ## Learn More
 

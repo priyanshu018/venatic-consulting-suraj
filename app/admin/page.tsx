@@ -13,6 +13,7 @@ import {
   appSecurity as appSecurityDefaults,
   caseStudies as caseStudiesDefaults,
   industries as industriesDefaults,
+  partners as partnersDefaults,
   workWithCards as workWithCardsDefaults,
   testimonials as testimonialsDefaults,
   contact as contactDefaults,
@@ -47,6 +48,7 @@ const NAV = [
   { id: "app-security", label: "App Security" },
   { id: "case-studies", label: "Success Stories" },
   { id: "industries", label: "Industries" },
+  { id: "partners", label: "Partners" },
   { id: "who-we-work-with", label: "Who We Work With" },
   { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact Info" },
@@ -66,6 +68,7 @@ export default async function AdminDashboardPage() {
     appSecurity,
     caseStudies,
     industries,
+    partners,
     whoWeWorkWith,
     testimonials,
     contact,
@@ -80,6 +83,7 @@ export default async function AdminDashboardPage() {
     getSection("app_security", appSecurityDefaults),
     getSection("case_studies", caseStudiesDefaults),
     getSection("industries", industriesDefaults),
+    getSection("partners", partnersDefaults),
     getSection("who_we_work_with", workWithCardsDefaults),
     getSection("testimonials", testimonialsDefaults),
     getSection("contact", contactDefaults),
@@ -195,7 +199,7 @@ export default async function AdminDashboardPage() {
         <AdminSectionCard
           id="case-studies"
           title="Success Stories"
-          description="Photos aren't editable here — only tag, title and description."
+          description="Photo, tag, title and description are all editable."
         >
           <ListEditor
             sectionKey="case_studies"
@@ -203,6 +207,7 @@ export default async function AdminDashboardPage() {
             initial={caseStudies}
             blankItem={{ tag: "", image: "", title: "", description: "" }}
             fields={[
+              { key: "image", label: "Photo", image: true },
               { key: "tag", label: "Tag" },
               { key: "title", label: "Title" },
               { key: "description", label: "Description", multiline: true },
@@ -223,9 +228,26 @@ export default async function AdminDashboardPage() {
         </AdminSectionCard>
 
         <AdminSectionCard
+          id="partners"
+          title="Partners in Progress"
+          description="The scrolling client-logo strip. Upload a logo image, or leave it blank to show the name as text."
+        >
+          <ListEditor
+            sectionKey="partners"
+            itemLabel="Partner"
+            initial={partners}
+            blankItem={{ name: "", image: "" }}
+            fields={[
+              { key: "image", label: "Logo", image: true },
+              { key: "name", label: "Name" },
+            ]}
+          />
+        </AdminSectionCard>
+
+        <AdminSectionCard
           id="who-we-work-with"
           title="Who We Work With"
-          description="Photos aren't editable here — only title and description."
+          description="Photo, title and description are all editable."
         >
           <ListEditor
             sectionKey="who_we_work_with"
@@ -233,6 +255,7 @@ export default async function AdminDashboardPage() {
             initial={whoWeWorkWith}
             blankItem={{ image: "", title: "", description: "" }}
             fields={[
+              { key: "image", label: "Photo", image: true },
               { key: "title", label: "Title" },
               { key: "description", label: "Description", multiline: true },
             ]}
