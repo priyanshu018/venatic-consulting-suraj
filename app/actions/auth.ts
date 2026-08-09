@@ -18,7 +18,11 @@ export async function login(_prevState: LoginState, formData: FormData): Promise
   try {
     valid = await verifyAdminCredentials(email, password);
   } catch (error) {
-    console.error("Admin login failed while connecting to Supabase.", error);
+    console.error("Admin login failed while connecting to Supabase.", {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+      email,
+    });
     return {
       error:
         "Could not reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY, then restart the dev server.",
