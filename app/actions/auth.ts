@@ -17,8 +17,12 @@ export async function login(_prevState: LoginState, formData: FormData): Promise
   let valid: boolean;
   try {
     valid = await verifyAdminCredentials(email, password);
-  } catch {
-    return { error: "Could not reach the database. Check DATABASE_URL." };
+  } catch (error) {
+    console.error("Admin login failed while connecting to Supabase.", error);
+    return {
+      error:
+        "Could not reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then restart the dev server.",
+    };
   }
 
   if (!valid) {
