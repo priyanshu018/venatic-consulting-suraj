@@ -45,10 +45,7 @@ created automatically on first upload) and are served from
    creates `admin_users`, `site_stats`, and `site_content` (the generic
    per-section store everything above lives in).
 3. **Copy the env file:** `cp .env.local.example .env.local` and fill in:
-   - `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` — from step 1.
-     **Do not** prefix the service role key with `NEXT_PUBLIC_` — that tells
-     Next.js to ship it to the browser, and it bypasses all database
-     security. See the comments in `.env.local.example` for details.
+   - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY` — from step 1.
    - `SESSION_SECRET` — a random secret for signing the admin login session.
      Generate one with `openssl rand -base64 32`.
    - `ADMIN_EMAIL` / `ADMIN_PASSWORD` — the login you'll use to sign in to

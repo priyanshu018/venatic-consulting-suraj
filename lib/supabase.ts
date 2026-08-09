@@ -12,14 +12,13 @@ export function getSupabase(): SupabaseClient {
   if (global._supabaseAdmin) return global._supabaseAdmin;
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  // Prefer an un-prefixed var if you rename it (recommended) — see README.
   const serviceRoleKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY ??
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY ??
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !serviceRoleKey) {
     throw new Error(
-      "Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (see .env.local.example)."
+      "Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY (see .env.local.example)."
     );
   }
 

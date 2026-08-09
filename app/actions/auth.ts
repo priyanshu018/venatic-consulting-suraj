@@ -21,7 +21,7 @@ export async function login(_prevState: LoginState, formData: FormData): Promise
     console.error("Admin login failed while connecting to Supabase.", error);
     return {
       error:
-        "Could not reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then restart the dev server.",
+        "Could not reach Supabase. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY, then restart the dev server.",
     };
   }
 

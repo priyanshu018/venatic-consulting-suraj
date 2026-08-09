@@ -1,25 +1,25 @@
 // Run with: pnpm seed:admin
 // Requires the schema in sql/schema.sql to already be applied via the
 // Supabase SQL Editor (supabase-js can read/write rows but can't create
-// tables). Requires NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (or
-// NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY), ADMIN_EMAIL, ADMIN_PASSWORD.
+// tables). Requires NEXT_PUBLIC_SUPABASE_URL,
+// NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY, ADMIN_EMAIL, ADMIN_PASSWORD.
 import { createClient } from "@supabase/supabase-js";
 import bcrypt from "bcryptjs";
 import * as content from "../app/components/content.ts";
 
 const {
   NEXT_PUBLIC_SUPABASE_URL,
-  SUPABASE_SERVICE_ROLE_KEY,
   NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY,
+  SUPABASE_SERVICE_ROLE_KEY,
   ADMIN_EMAIL,
   ADMIN_PASSWORD,
 } = process.env;
 
-const serviceRoleKey = SUPABASE_SERVICE_ROLE_KEY ?? NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+const serviceRoleKey = NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY ?? SUPABASE_SERVICE_ROLE_KEY;
 
 if (!NEXT_PUBLIC_SUPABASE_URL || !serviceRoleKey) {
   console.error(
-    "Missing NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY. Copy .env.local.example to .env.local (or .env) and fill it in."
+    "Missing NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY. Copy .env.local.example to .env.local (or .env) and fill it in."
   );
   process.exit(1);
 }
